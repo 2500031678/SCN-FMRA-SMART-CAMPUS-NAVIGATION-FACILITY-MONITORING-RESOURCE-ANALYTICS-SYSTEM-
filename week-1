@@ -1,0 +1,19 @@
+print("--- SMART CAMPUS-FACILITY ENTRY ---")
+print("-"*50)
+# INPUT: Get facility details
+room_name = input("Room Name: ")
+building_name = input("Building: ")
+room_type = input("Room type (classroom/Lab): ")
+capacity = int(input("Seating capacity: "))
+floor = int(input("Floor Number: "))
+
+# VALIDATION: Check if Capacity is valid
+if capacity > 0:
+    print("\n--- FACILITY RECORDED ---")
+    print(f"Room: {room_name}")
+    print(f"Building: {building_name}")
+    print(f"Type: {room_type}")
+    print(f"Capacity: {capacity}")
+    print(f"Floor: {floor}")
+else:
+    print("ERROR: capacity must be > 0!") [cite: 1, 2]
