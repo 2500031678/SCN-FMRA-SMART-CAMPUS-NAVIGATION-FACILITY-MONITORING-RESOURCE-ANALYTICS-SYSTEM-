@@ -1,0 +1,31 @@
+import json
+import csv
+
+# 1. JSON STORAGE (For Complex Data)
+campus_assets = [
+    {"id": "A101", "name": "Projector", "lab": "E-201"},
+    {"id": "A102", "name": "Router", "lab": "Server Room"}
+]
+
+with open("campus_data.json", "w") as json_file:
+    json.dump(campus_assets, json_file, indent=4)
+print("[System] JSON File 'campus_data.json' created successfully.")
+
+# 2. CSV EXPORT (For Admin Excel Reports)
+complaints = [
+    ["ID", "Issue", "Urgency"],
+    ["C1", "No WiFi", "High"],
+    ["C2", "Broken Bench", "Low"]
+]
+
+with open("reports.csv", "w", newline="") as csv_file:
+    writer = csv.writer(csv_file)
+    writer.writerows(complaints)
+print("[System] CSV Report 'reports.csv' exported for Admin.")
+
+# 3. READING BACK TO VERIFY
+print("\n--- READING DATA FROM JSON ---")
+with open("campus_data.json", "r") as f:
+    loaded_data = json.load(f)
+    for item in loaded_data:
+        print(f"Asset Found: {item['name']} in {item['lab']}")
