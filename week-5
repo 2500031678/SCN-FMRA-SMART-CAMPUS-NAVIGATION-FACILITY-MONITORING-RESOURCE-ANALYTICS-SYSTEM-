@@ -1,0 +1,15 @@
+facilities = {
+    "E-202": {"type": "classroom", "floor": 2, "coords": (40, 235)},
+    "L-101": {"type": "Library", "floor": 1, "coords": (10, 15)}
+}
+
+# Set comprehension for unique types
+unique_types = {data["type"] for data in facilities.values()}
+
+def get_facility(fid):
+    return facilities.get(fid, "Not Found")
+
+# Execution Logic
+print(f"Available Categories: {unique_types}")
+search_id = input("Enter Room ID (e.g., E-202): ")
+print(f"Details: {get_facility(search_id)}") [cite: 12]
