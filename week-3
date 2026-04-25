@@ -1,0 +1,68 @@
+facilities = []
+
+
+def normalize(text):
+    return text.strip().lower()
+
+
+def add_facility():
+    room = input("Room: ")
+    building = input("Building: ")
+    room_type = input("Type: ")
+    capacity = int(input("Capacity: "))
+    floor = int(input("Floor: "))
+    facilities.append((room, building, room_type, capacity, floor))
+    print(f"{room} Added!")
+
+
+def search_building():
+    search = input("Building name: ")
+    search = normalize(search)
+    found = [f for f in facilities if normalize(f[1]) == search]
+    if found:
+        for f in found:
+            print(f"{f[0]} | {f[1]} | Floor: {f[4]}")
+    else:
+        print("Not found!")
+
+
+def search_type():
+    search = input("Room type: ")
+    search = normalize(search)
+    found = [f for f in facilities if normalize(f[2]) == search]
+    if found:
+        for f in found:
+            print(f"{f[0]} | {f[1]} | Floor: {f[4]}")
+    else:
+        print("Not found!")
+
+
+def list_all():
+    if facilities:
+        print("Room | Building | Type | Cap | Floor")
+        print("-" * 45)
+        for f in facilities:
+            print(f"{f[0]} | {f[1]} | {f[2]} | {f[3]} | {f[4]}")
+    else:
+        print("No facilities!")
+
+
+while True:
+    print("\n" + "=" * 45)
+    print("SEARCH SYSTEM")
+    print("=" * 45)
+    print("1. Add | 2. List | 3. Search Building | 4. Search Type | 5. Exit")
+    choice = input("Choose: ").strip()
+
+    if choice == "1":
+        add_facility()
+    elif choice == "2":
+        list_all()
+    elif choice == "3":
+        search_building()
+    elif choice == "4":
+        search_type()
+    elif choice == "5":
+        break
+    else:
+        print("Invalid!")[cite: 5, 6, 7]
