@@ -1,0 +1,23 @@
+import matplotlib.pyplot as plt
+
+
+def plot_usage():
+    rooms = ['E-Block', 'Admin', 'Library', 'Hostel', 'Labs']
+    usage_scores = [85, 40, 95, 60, 75]
+
+    plt.figure(figsize=(10, 5))
+
+    # Creating a Bar Chart for Block Utilization
+    plt.bar(rooms, usage_scores, color=['blue', 'gray', 'green', 'orange', 'red'])
+
+    plt.title('Campus Block Utilization (%)')
+    plt.xlabel('University Blocks')
+    plt.ylabel('Utilization Percentage')
+    plt.grid(axis='y', linestyle='--', alpha=0.7)
+
+    print("[System] Generating visualization chart...")
+    plt.show()
+
+
+if __name__ == "__main__":
+    plot_usage()
