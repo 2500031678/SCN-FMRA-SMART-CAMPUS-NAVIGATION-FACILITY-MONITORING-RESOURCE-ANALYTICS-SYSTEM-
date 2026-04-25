@@ -1,0 +1,29 @@
+import pandas as pd
+import numpy as np
+
+# Sample Data Simulation
+data = {
+    'Room': ['E-101', 'E-102', 'Admin-1', 'Lib-S1', 'E-201'],
+    'Usage_Hours': [45, 12, 38, 55, 5],
+    'Capacity': [60, 60, 20, 100, 30]
+}
+
+df = pd.DataFrame(data)
+
+
+def generate_report():
+    print("--- CAMPUS RESOURCE UTILIZATION ---")
+    # Using NumPy for occupancy percentage
+    usage_array = np.array(df['Usage_Hours'])
+    avg_usage = np.mean(usage_array)
+
+    # Using Pandas for Grouping
+    df['Status'] = df['Usage_Hours'].apply(lambda x: 'High' if x > 30 else 'Low')
+
+    print(df)
+    print(f"\nAverage Weekly Usage: {avg_usage} hours")
+    print(f"Under-utilized Rooms: {df[df['Usage_Hours'] < 10]['Room'].values}")
+
+
+if __name__ == "__main__":
+    generate_report()
