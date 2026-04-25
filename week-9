@@ -1,0 +1,26 @@
+def navigation_module():
+    print("[Module: NAV] Calculating shortest path from Library to Admin Block...")
+    print("[Result] Path: Library -> Central Canteen -> Admin Block (500m)")
+
+def resource_analytics():
+    print("[Module: ANALYTICS] Room usage: E-Block (85%), Mechanical Block (40%)")
+
+def main():
+    print("************************************")
+    print("* WELCOME TO SMART CAMPUS NAVIGATION (SCN) *")
+    print("************************************")
+    print("1. Find Navigation Path")
+    print("2. Run Resource Analytics")
+    print("3. Exit")
+
+    # Simulating a user selection of option 1 then 2
+    print("\nUser Action: Selecting option 1...")
+    navigation_module()
+
+    print("\nUser Action: Selecting option 2...")
+    resource_analytics()
+
+    print("\n[system] Operations complete. All modules verified.")
+
+if __name__ == "__main__":
+    main()
