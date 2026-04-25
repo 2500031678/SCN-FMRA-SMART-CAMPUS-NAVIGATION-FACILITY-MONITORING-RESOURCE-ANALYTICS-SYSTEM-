@@ -1,0 +1,82 @@
+facilities = []
+fac_id = 1000
+
+
+def gen_id():
+    global fac_id
+    id_str = f"FAC-{fac_id}"
+    fac_id += 1
+    return id_str
+
+
+def validate(cap, floor):
+    return cap > 0 and floor >= 0
+
+
+def add_fac():
+    room = input("Room: ")
+    building = input("Building: ")
+    room_type = input("Type: ")
+    cap = int(input("Capacity: "))
+    floor = int(input("Floor: "))
+
+    if validate(cap, floor):
+        fid = gen_id()
+        facilities.append({
+            "id": fid, "room": room, "building": building,
+            "type": room_type, "capacity": cap, "floor": floor
+        })
+        print(f"Added! ID: {fid}")
+    else:
+        print("Invalid data!")
+
+
+def search_bldg(bldg):
+    results = [f for f in facilities if f["building"].lower() == bldg.lower()]
+    if results:
+        for f in results:
+            print(f"{f['id']} | {f['room']} | {f['building']} | Floor: {f['floor']}")
+    else:
+        print("Not found!")
+
+
+def search_type(typ):
+    results = [f for f in facilities if f["type"].lower() == typ.lower()]
+    if results:
+        for f in results:
+            print(f"{f['id']} | {f['room']} | Floor: {f['floor']}")
+    else:
+        print("Not Found!")
+
+
+def list_all():
+    if facilities:
+        print("ID | Room | Building | Type | Cap | Floor")
+        print("-" * 50)
+        for f in facilities:
+            print(f"{f['id']} | {f['room']} | {f['building']} | {f['type']} | {f['capacity']} | {f['floor']}")
+    else:
+        print("No facilities!")
+
+
+while True:
+    print("\n" + "=" * 50)
+    print("FACILITY MANAGEMENT")
+    print("=" * 50)
+    print("1. Add | 2. List | 3. Search Building | 4. Search Type | 5. Exit")
+    choice = input("Choose: ").strip()
+
+    if choice == "1":
+        add_fac()
+    elif choice == "2":
+        list_all()
+    elif choice == "3":
+        bldg = input("Building: ")
+        search_bldg(bldg)
+    elif choice == "4":
+        typ = input("Type: ")
+        search_type(typ)
+    elif choice == "5":
+        break
+    else:
+        print("Invalid!")[cite: 8, 9, 10, 11]
