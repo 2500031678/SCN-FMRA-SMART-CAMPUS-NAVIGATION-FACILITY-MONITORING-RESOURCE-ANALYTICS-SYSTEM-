@@ -1,0 +1,20 @@
+class Facility:
+    def __init__(self, fid, rtype):
+        self.fid = fid
+        self.rtype = rtype
+
+    def __str__(self):
+        return f"Facility {self.fid} is a {self.rtype} type"
+
+class Booking:
+    def __init__(self, fid, user):
+        self.fid = fid
+        self.user = user
+
+# Execution Logic
+room = Facility("E-405", "Lab")
+print(room)
+
+user_input = input("Enter user name to book: ")
+booking = Booking(room.fid, user_input)
+print(f"Booking confirmed for {booking.user} in {booking.fid}") [cite: 13, 14]
