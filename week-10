@@ -1,0 +1,80 @@
+import os
+import re
+import sys
+
+
+# ==========================================================
+# STEP 1: AUTOMATED PACKAGE INITIALIZATION
+# This ensures the folders and __init__.py files exist
+# ==========================================================
+def initialize_package_structure():
+    # Define the package directories
+    directories = ['academic_system', 'academic_system/models',
+                   'academic_system/services', 'academic_system/utils']
+
+    for directory in directories:
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+        # Create __init__.py to make the directory a Python Package
+        init_path = os.path.join(directory, '__init__.py')
+        if not os.path.exists(init_path):
+            with open(init_path, 'w') as f:
+                f.write(f"# Init for {directory}\n")
+
+    # Create the Validation Utility (fixes the \d warning)
+    with open('academic_system/utils/validators.py', 'w') as f:
+        f.write(r"""
+import re
+def validate_room_format(room_id):
+    # Using a raw string r'' to avoid escape sequence warnings
+    pattern = r'^[A-Z]+-\d+$' 
+    if not re.match(pattern, room_id):
+        raise ValueError(f"Invalid Format: {room_id}. Use 'Block-Number' (e.g. E-405)")
+    return True
+""")
+
+    # Create the Facility Model
+    with open('academic_system/models/facility.py', 'w') as f:
+        f.write("""
+class Facility:
+    def __init__(self, room_id, room_type):
+        self.room_id = room_id
+        self.room_type = room_type
+    def __str__(self):
+        return f"Facility: {self.room_id} | Type: {self.room_type}"
+""")
+
+
+# ==========================================================
+# STEP 2: MAIN EXECUTION
+# ==========================================================
+def main():
+    # Setup folders first
+    initialize_package_structure()
+
+    # Add the current directory to path so imports work immediately
+    sys.path.append(os.getcwd())
+
+    try:
+        # Import from our newly created packages
+        from academic_system.utils.validators import validate_room_format
+        from academic_system.models.facility import Facility
+
+        print("--- SCN-FMRA: Week 10 Package System ---")
+        rid = input("Enter Room ID (e.g., E-405): ")
+
+        if validate_room_format(rid):
+            rtype = input("Enter Room Type (e.g., Lab/Classroom): ")
+            room = Facility(rid, rtype)
+
+            print("\n[SUCCESS] Registration Complete")
+            print(room)
+
+    except ValueError as e:
+        print(f"\n[VALIDATION ERROR] {e}")
+    except Exception as e:
+        print(f"\n[SYSTEM ERROR] {e}")
+
+
+if __name__ == "__main__":
+    main()
