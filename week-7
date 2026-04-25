@@ -1,0 +1,40 @@
+import datetime
+
+class Record:
+    """Base class providing timestamps for all campus activities"""
+    def __init__(self):
+        self.created_at = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+class Asset(Record):
+    """Child class for Campus Inventory"""
+    def __init__(self, asset_id, name, block):
+        super().__init__()
+        self.asset_id = asset_id
+        self.name = name
+        self.block = block
+
+    def show_details(self):
+        print(f"--- ASSET RECORD ---")
+        print(f"ID: {self.asset_id} | Name: {self.name} | Block: {self.block}")
+        print(f"Logged at: {self.created_at}\n")
+
+class Complaint(Record):
+    """Child class for Maintenance with Private data (Encapsulation)"""
+    def __init__(self, c_id, issue, room):
+        super().__init__()
+        self.c_id = c_id
+        self.__issue = issue  # Private variable
+        self.room = room
+        self.status = "Pending"
+
+    def get_issue(self):
+        return self.__issue
+
+# --- EXECUTION ---
+asset_item = Asset("KL-LAB-05", "Dell Workstation", "Computer Science Block")
+user_complaint = Complaint("CMP-402", "AC Leakage", "Room 302")
+
+asset_item.show_details()
+print(f"--- COMPLAINT LOG ---")
+print(f"Ticket: {user_complaint.c_id} | Issue: {user_complaint.get_issue()}")
+print(f"Location: {user_complaint.room} | Status: {user_complaint.status}")
